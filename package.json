@@ -1,0 +1,10 @@
+{
+  "name": "google-sheet-helpers",
+  "version": "1.0.0",
+  "description": "My lib with simple functions that I use in my own work with Google Apps Scripts",
+  "main": "main.js",
+  "repository": "https://github.com/Glajik/google-sheet-helpers.git",
+  "author": "Viacheslav Glazhevskyi <glajik@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
