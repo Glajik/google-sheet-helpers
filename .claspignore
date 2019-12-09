@@ -1,0 +1,8 @@
+LICENSE
+!appsscript.json
+*.md
+package.json
+*.sh
+src/**
+node_modules/**
+__tests__/**
