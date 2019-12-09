@@ -5,7 +5,7 @@ function isEmpty(value) {
   return !value;
 }
 
-function hasIn(value, list) {
+function hasIn(list, value) {
   function isEq(item) {
     return item === value;
   }

@@ -5,7 +5,7 @@ export function isEmpty(value) {
   return !value;
 }
 
-export function hasIn(value, list) {
+export function hasIn(list, value) {
   function isEq(item) {
     return item === value;
   }
