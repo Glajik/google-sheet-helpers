@@ -9,14 +9,14 @@ export function getLetter(num) {
   return String.fromCharCode(offset + remainder - 1);
 }
 
-export function convert(num) {
+export function getColLetters(num) {
   if (num < 27) {
     return getLetter(num);
   }
   const result = Math.floor(num / 26);
   if (num % 26 === 0) { 
-    return convert(result - 1) + getLetter(num);
+    return getColLetters(result - 1) + getLetter(num);
   }
-  return convert(result) + getLetter(num);
+  return getColLetters(result) + getLetter(num);
 }
     

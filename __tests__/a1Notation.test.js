@@ -1,4 +1,4 @@
-import { getLetter, convert } from '../src/a1Notation';
+import { getLetter, getColLetters } from '../src/a1Notation';
 
 it('getLetter - should work', () => {
   expect(getLetter(1)).toBe('A');
@@ -11,22 +11,22 @@ it('getLetter - should work', () => {
   expect(getLetter(53)).toBe('A');
 });
 
-it('convert - should work', () => {
-  expect(convert(1)).toBe('A');
-  expect(convert(2)).toBe('B');
-  expect(convert(26)).toBe('Z');
-  expect(convert(27)).toBe('AA');
-  expect(convert(28)).toBe('AB');
-  expect(convert(29)).toBe('AC');
-  expect(convert(30)).toBe('AD');
-  expect(convert(52)).toBe('AZ');
-  expect(convert(53)).toBe('BA');
-  expect(convert(676)).toBe('YZ');
-  expect(convert(677)).toBe('ZA');
-  expect(convert(703)).toBe('AAA');
-  expect(convert(717)).toBe('AAO');
-  expect(convert(728)).toBe('AAZ');
-  expect(convert(729)).toBe('ABA');
-  expect(convert(730)).toBe('ABB');
-  expect(convert(18278)).toBe('ZZZ');
+it('getColLetters - should work', () => {
+  expect(getColLetters(1)).toBe('A');
+  expect(getColLetters(2)).toBe('B');
+  expect(getColLetters(26)).toBe('Z');
+  expect(getColLetters(27)).toBe('AA');
+  expect(getColLetters(28)).toBe('AB');
+  expect(getColLetters(29)).toBe('AC');
+  expect(getColLetters(30)).toBe('AD');
+  expect(getColLetters(52)).toBe('AZ');
+  expect(getColLetters(53)).toBe('BA');
+  expect(getColLetters(676)).toBe('YZ');
+  expect(getColLetters(677)).toBe('ZA');
+  expect(getColLetters(703)).toBe('AAA');
+  expect(getColLetters(717)).toBe('AAO');
+  expect(getColLetters(728)).toBe('AAZ');
+  expect(getColLetters(729)).toBe('ABA');
+  expect(getColLetters(730)).toBe('ABB');
+  expect(getColLetters(18278)).toBe('ZZZ');
 });

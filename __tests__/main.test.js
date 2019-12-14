@@ -1,7 +1,7 @@
 // import sinon from 'sinon';
 
 import {
-  isEmpty, getLetter, createMap, updateWith, rowWrapper,
+  isEmpty, createMap, updateWith, rowWrapper,
 } from '../src/main';
 
 it('isEmpty - should work', () => {
@@ -18,13 +18,6 @@ it('isEmpty - should work', () => {
   expect(isEmpty(0)).toBeTruthy();
 
   expect(isEmpty('some text')).toBe(false);
-});
-
-it('getLetter - should work', () => {
-  expect(getLetter(1)).toBe('A');
-  expect(getLetter(2)).toBe('B');
-  expect(getLetter(26)).toBe('Z');
-  expect(getLetter(27)).toBe('A');
 });
 
 it('createMap - should work', () => {
