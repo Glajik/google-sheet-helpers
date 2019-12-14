@@ -1,4 +1,4 @@
-import { getLetter_, toLetters_ } from '../src/a1Notation';
+import { getLetter_, toLetters_, getA1Notation } from '../src/getA1Notation';
 
 it('getLetter_ - should work', () => {
   expect(getLetter_(1)).toBe('A');
@@ -29,4 +29,15 @@ it('toLetters_ - should work', () => {
   expect(toLetters_(729)).toBe('ABA');
   expect(toLetters_(730)).toBe('ABB');
   expect(toLetters_(18278)).toBe('ZZZ');
+});
+
+it('getA1Notation - should work', () => {
+  expect(() => getA1Notation()).toThrowError('Function expects at least one argument');
+  expect(getA1Notation(1)).toBe('1:1');
+  expect(getA1Notation(null, 1)).toBe('A:A');
+  expect(getA1Notation(1, 1)).toBe('A1');
+  expect(getA1Notation(1, 1, 2)).toBe('A1:A2');
+  expect(getA1Notation(11, 1, 10)).toBe('A11:A20');
+  expect(getA1Notation(1, 1, 2, 2)).toBe('A1:B2');
+  expect(getA1Notation(11, 3, 1, 3)).toBe('C11:E11');
 });

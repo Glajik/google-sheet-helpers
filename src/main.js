@@ -1,5 +1,3 @@
-import { getLetter, convert } from './a1Notation';
-
 export function isEmpty(value) {
   if (value instanceof Array) return !value.length;
   if (typeof value === 'string') return !value.length;
@@ -36,30 +34,6 @@ export function extract(str, regex) {
     return result[1];
   }
   return str;
-}
-
-export function getA1Notation(row, col, rows, cols) {
-  if (!arguments) throw new Error('Аunction expects at least one argument'); // eslint-disable-line prefer-rest-params
-  // A1:Z5
-  if (row && col && rows && cols) {
-    return [
-      getColLetters(col).concat(row),
-      getColLetters(col + cols - 1).concat(row + rows - 1)
-    ].join(':');
-  }
-  // A1:A5
-  if (row && col && rows) {
-    return [
-      getColLetters(col).concat(row),
-      getColLetters(col).concat(row + rows - 1)
-    ].join(':');
-  }
-  // A1
-  if (row && col) {
-    return getColLetters(col).concat(row);
-  }
-  // 1:1 for row, or A:A for column
-  return [row, row].join(':');
 }
 
 export function updateWith(keys, values) {

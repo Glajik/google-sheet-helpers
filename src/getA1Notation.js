@@ -36,4 +36,40 @@ export function toLetters_(num) {
   }
   return toLetters_(result) + getLetter_(num);
 }
-    
+
+/**
+ * Converts the coordinates of the range, represented as numbers in a1Notation,
+ * like A1, or A5:K10
+ * 
+ * @param {Integer} row Row number
+ * @param {Integer} col Column number
+ * @param {Integer} rows Rows count
+ * @param {Integer} cols Columns count
+ * @returns {String} Coordinates of the range in a1Notation
+ */
+export function getA1Notation(row, col, rows, cols) {
+  function join(a, b) {
+    return [a, b].join(':')
+  }
+  const A1 = col && row && toLetters_(col).concat(row);
+  switch (arguments.length) {
+    case 0:
+      throw new Error('Function expects at least one argument');
+    case 1:
+      return join(row, row);
+    case 2:
+      if (col && !row) {
+        const A = toLetters_(col);
+        return join(A, A);
+      }
+      return A1;
+    case 3:
+      const A5 = toLetters_(col).concat(row + rows - 1);
+      return join(A1, A5);
+    case 4:
+      const Z5 = toLetters_(col + cols - 1).concat(row + rows - 1);
+      return join(A1, Z5);
+    default:
+      break;
+  }
+}
