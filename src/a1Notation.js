@@ -2,6 +2,6 @@ export function getLetter(num) {
   return 'A';
 }
 
-export function convert(num) {
+export function getColLetters(num) {
   return getLetter(num);
 }
