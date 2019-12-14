@@ -1,3 +1,5 @@
+import { createMap } from './utils'
+
 export function updateWith_(keys, values) {
   return function(data) {
     function fn(value, index) {
@@ -7,14 +9,6 @@ export function updateWith_(keys, values) {
     }
     return values.map(fn);
   };
-}
-
-export function createMap_(keys, values) {
-  function fn(acc, key, index) {
-    acc[key] = values[index];
-    return acc;
-  }
-  return keys.reduce(fn, {});
 }
 
 /**
@@ -45,7 +39,7 @@ export function getWrapped(keys, range, values) {
      * @param {String} key
      */
     get: function(key) {
-      const data = createMap_(keys, values);
+      const data = createMap(keys, values);
       if (key) return data[key];
       return data;
     },

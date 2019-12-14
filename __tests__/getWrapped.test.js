@@ -1,12 +1,6 @@
 // import sinon from 'sinon';
 
-import { createMap_, updateWith_, getWrapped } from '../src/getWrapped';
-
-it('createMap_ - should work', () => {
-  const keys = ['first', 'second'];
-  const values = ['a', 'b'];
-  expect(createMap_(keys, values)).toEqual({ first: 'a', second: 'b' });
-});
+import { updateWith_, getWrapped } from '../src/getWrapped';
 
 it('updateWith_ - should work', () => {
   const keys = ['first', 'second'];

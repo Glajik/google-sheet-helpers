@@ -6,18 +6,31 @@ export function isEmpty(value) {
 }
 
 export function hasIn(list, value) {
+  if (!list) return false;
   function isEq(item) {
     return item === value;
   }
   return list.some(isEq);
 }
 
+export function createMap(keys, values) {
+  function fn(acc, key, index) {
+    acc[key] = values[index];
+    return acc;
+  }
+  return keys.reduce(fn, {});
+}
+
 export function pick(obj, keys) {
+  if (isEmpty(obj) || isEmpty(keys)) return {};
   function getValue(key) {
     return obj[key];
   }
+  if (typeof keys === 'string') {
+    return { [keys]: obj[keys] };
+  }
   const values = keys.map(getValue);
-  return createMap_(keys, values);
+  return createMap(keys, values);
 }
 
 export function extract(str, regex) {
