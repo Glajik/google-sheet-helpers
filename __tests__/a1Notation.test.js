@@ -1,32 +1,32 @@
-import { getLetter, getColLetters } from '../src/a1Notation';
+import { getLetter_, toLetters_ } from '../src/a1Notation';
 
-it('getLetter - should work', () => {
-  expect(getLetter(1)).toBe('A');
-  expect(getLetter(2)).toBe('B');
-  expect(getLetter(25)).toBe('Y');
-  expect(getLetter(26)).toBe('Z');
-  expect(getLetter(27)).toBe('A');
-  expect(getLetter(28)).toBe('B');
-  expect(getLetter(52)).toBe('Z');
-  expect(getLetter(53)).toBe('A');
+it('getLetter_ - should work', () => {
+  expect(getLetter_(1)).toBe('A');
+  expect(getLetter_(2)).toBe('B');
+  expect(getLetter_(25)).toBe('Y');
+  expect(getLetter_(26)).toBe('Z');
+  expect(getLetter_(27)).toBe('A');
+  expect(getLetter_(28)).toBe('B');
+  expect(getLetter_(52)).toBe('Z');
+  expect(getLetter_(53)).toBe('A');
 });
 
-it('getColLetters - should work', () => {
-  expect(getColLetters(1)).toBe('A');
-  expect(getColLetters(2)).toBe('B');
-  expect(getColLetters(26)).toBe('Z');
-  expect(getColLetters(27)).toBe('AA');
-  expect(getColLetters(28)).toBe('AB');
-  expect(getColLetters(29)).toBe('AC');
-  expect(getColLetters(30)).toBe('AD');
-  expect(getColLetters(52)).toBe('AZ');
-  expect(getColLetters(53)).toBe('BA');
-  expect(getColLetters(676)).toBe('YZ');
-  expect(getColLetters(677)).toBe('ZA');
-  expect(getColLetters(703)).toBe('AAA');
-  expect(getColLetters(717)).toBe('AAO');
-  expect(getColLetters(728)).toBe('AAZ');
-  expect(getColLetters(729)).toBe('ABA');
-  expect(getColLetters(730)).toBe('ABB');
-  expect(getColLetters(18278)).toBe('ZZZ');
+it('toLetters_ - should work', () => {
+  expect(toLetters_(1)).toBe('A');
+  expect(toLetters_(2)).toBe('B');
+  expect(toLetters_(26)).toBe('Z');
+  expect(toLetters_(27)).toBe('AA');
+  expect(toLetters_(28)).toBe('AB');
+  expect(toLetters_(29)).toBe('AC');
+  expect(toLetters_(30)).toBe('AD');
+  expect(toLetters_(52)).toBe('AZ');
+  expect(toLetters_(53)).toBe('BA');
+  expect(toLetters_(676)).toBe('YZ');
+  expect(toLetters_(677)).toBe('ZA');
+  expect(toLetters_(703)).toBe('AAA');
+  expect(toLetters_(717)).toBe('AAO');
+  expect(toLetters_(728)).toBe('AAZ');
+  expect(toLetters_(729)).toBe('ABA');
+  expect(toLetters_(730)).toBe('ABB');
+  expect(toLetters_(18278)).toBe('ZZZ');
 });
