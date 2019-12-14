@@ -1,6 +1,6 @@
 parserOptions:
   ecmaVersion: 6
-  sourceType: 'module'
+  sourceType: module
 env:
   node: commonjs
 rules:
@@ -12,4 +12,8 @@ rules:
   comma-dangle: 1
   prefer-destructuring: 0
   object-curly-newline: 1
+  no-underscore-dangle: 0
+  no-unused-vars:
+    - error,
+    - varsIgnorePattern: _
 # root: true
