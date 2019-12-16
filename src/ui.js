@@ -40,11 +40,21 @@ export function uiRemoveSelected(sheet) {
     .forEach(unselect);
 }
 
-export function uiAreYouSure(title, prompt) {
+export function uiDialogAccept(title, prompt) {
   const ui = SpreadsheetApp.getUi();
   const buttons = ui.ButtonSet.OK_CANCEL;
   const response = ui.alert(title, prompt, buttons);
   if (response === ui.Button.CANCEL) throw new Error('Действие отменено');
+}
+
+export function uiDialogAsk(title, prompt) {
+  const ui = SpreadsheetApp.getUi();
+  const buttons = ui.ButtonSet.OK_CANCEL;
+  const response = ui.prompt(title, prompt, buttons);
+  if (response.getSelectedButton() === ui.Button.CANCEL) {
+    throw new Error('Действие отменено');
+  }
+  return response.getResponseText().trim();
 }
 
 export function uiToast(msg) {
