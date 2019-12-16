@@ -1,4 +1,4 @@
-import { createMap } from './utils'
+import { createMap } from './lodash'
 
 export function updateWith_(keys, values) {
   return function(data) {

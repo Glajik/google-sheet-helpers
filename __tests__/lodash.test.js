@@ -1,6 +1,6 @@
 // import sinon from 'sinon';
 
-import { isEmpty, hasIn, createMap, pick } from '../src/utils';
+import { isEmpty, hasIn, createMap, pick } from '../src/lodash';
 
 it('isEmpty - should work', () => {
   expect(isEmpty()).toBeTruthy();
