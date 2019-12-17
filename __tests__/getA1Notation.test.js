@@ -37,7 +37,9 @@ it('getA1Notation - should work', () => {
   expect(getA1Notation(null, 1)).toBe('A:A');
   expect(getA1Notation(1, 1)).toBe('A1');
   expect(getA1Notation(1, 1, 2)).toBe('A1:A2');
-  expect(getA1Notation(11, 1, 10)).toBe('A11:A20');
+  // old - expect(getA1Notation(11, 1, 10)).toBe('A11:A20');
+  expect(getA1Notation(11, 1, 20)).toBe('A11:A20');
   expect(getA1Notation(1, 1, 2, 2)).toBe('A1:B2');
-  expect(getA1Notation(11, 3, 1, 3)).toBe('C11:E11');
+  // old - expect(getA1Notation(11, 3, 1, 3)).toBe('C11:E11');
+  expect(getA1Notation(11, 3, 11, 5)).toBe('C11:E11');
 });

@@ -43,11 +43,11 @@ export function toLetters_(num) {
  * 
  * @param {Integer} row Row number
  * @param {Integer} col Column number
- * @param {Integer} rows Rows count
- * @param {Integer} cols Columns count
+ * @param {Integer} lastRow Last row number
+ * @param {Integer} lastCol Last column number
  * @returns {String} Coordinates of the range in a1Notation
  */
-export function getA1Notation(row, col, rows, cols) {
+export function getA1Notation(row, col, lastRow, lastCol) {
   function join(a, b) {
     return [a, b].join(':')
   }
@@ -64,10 +64,10 @@ export function getA1Notation(row, col, rows, cols) {
       }
       return A1;
     case 3:
-      const A5 = toLetters_(col).concat(row + rows - 1);
+      const A5 = toLetters_(col).concat(lastRow);
       return join(A1, A5);
     case 4:
-      const Z5 = toLetters_(col + cols - 1).concat(row + rows - 1);
+      const Z5 = toLetters_(lastCol).concat(lastRow);
       return join(A1, Z5);
     default:
       break;
