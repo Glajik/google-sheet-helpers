@@ -27,7 +27,7 @@ export function pick(obj, keys) {
     return obj[key];
   }
   if (typeof keys === 'string') {
-    return { [keys]: obj[keys] };
+    return Object.defineProperty({}, keys, { value: obj[keys], enumerable: true });
   }
   const values = keys.map(getValue);
   return createMap(keys, values);
