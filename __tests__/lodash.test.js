@@ -1,6 +1,6 @@
 // import sinon from 'sinon';
 
-import { isEmpty, hasIn, createMap, pick } from '../src/lodash';
+import { isEmpty, hasIn, createMap, pick, isObject, isPlainObject } from '../src/lodash';
 
 it('isEmpty - should work', () => {
   expect(isEmpty()).toBeTruthy();
@@ -40,4 +40,30 @@ it('pick - should work', () => {
   expect(pick(dict, ['a', 'c'])).toEqual({ a: 1, c: 3 });
   expect(pick(dict, 'd')).toEqual({});
   expect(pick()).toEqual({});
+});
+
+it('isObject - should work', () => {
+  function Foo() {
+    this.a = 1;
+  }
+  expect(isObject({})).toBeTruthy();
+  expect(isObject([1, 2, 3])).toBeTruthy();
+  expect(isObject(Foo)).toBeTruthy();
+  expect(isObject(null)).toBeFalsy();
+});
+
+it('isPlainObject - should work', () => {
+  expect(isPlainObject({ a: 1 })).toBeTruthy();
+
+  function Foo() {
+    this.a = 1;
+  }
+  expect(isPlainObject(Foo)).toBeFalsy();
+  expect(isPlainObject(new Foo())).toBeFalsy();
+
+  expect(isPlainObject([])).toBeFalsy();
+  expect(isPlainObject(1)).toBeFalsy();
+  expect(isPlainObject(true)).toBeFalsy();
+  expect(isPlainObject('string')).toBeFalsy();
+  expect(isPlainObject(undefined)).toBeFalsy();
 });
