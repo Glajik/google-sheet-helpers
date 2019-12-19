@@ -12,10 +12,10 @@ function byKey_(key) {
 };
 
 /**
- * Where `item[key] === value`
+ * Take `key` and `value` and return predicate function
  * @param {String} key 
  * @param {*} value 
- * @returns Predicate for filter function
+ * @returns Predicate `(item) => item[key] === value`
  */
 export function byKeyValue_(key, value) {
   return function(item) {
@@ -27,9 +27,20 @@ export function byKeyValue_(key, value) {
 };
 
 /**
- * Define your search terms using the dictionary
- * @param {Object} obj 
- * @returns Array of predicates that can be used in filter functions.
+ * Allow to define your search terms as plain object.
+ * 
+ * @example
+ * ```
+ * const list = byObj_({ id: 123, name: 'Joe' });
+ * 
+ * // list will contain:
+ * [
+ *  (item) => item['id'] === 123,
+ *  (item) => item['name'] === 'Joe'
+ * ]
+ * ```
+ * @param {Object} obj Plain query object
+ * @returns Array of predicates: [`(item) => item[key] === value`, ... ]
  */
 export function byObj_(obj) {
   if (!isPlainObject(obj)) return [];
@@ -42,12 +53,37 @@ export function byObj_(obj) {
   )
 };
 
+/**
+ * Map operation
+ * 
+ * @param {Function} callback Function, that will be applied to each item in collection
+ * @returns Function, that expect list, and apply map with callback to it.
+ */
+function map_(callback) {
+  return function(coll) {
+    return coll.map(callback);
+  }
+}
+
+/**
+ * Filter operation
+ * 
+ * @param {Function} predicate Callback, that return `true | false`
+ * @returns Function, that expect list, and apply filter with predicate to it.
+ */
 function filter_(predicate) {
   return function(coll) {
     return coll.filter(predicate);
   }
 }
 
+/**
+ * Sort operation
+ * 
+ * @param {Function} fn Function, that will be applied to compared arguments. For example it can be used to extract values by key from compared objects.
+ * @param {String} [direction='asc'] Specifies the direction of sorting. Valid values: `asc | desc`. Optional, default direction - ascendant.
+ * @returns Function, that expect list, and apply sort to it.
+ */
 function sort_(fn, direction) {
   return function(coll) {
     return coll.sort(
@@ -61,56 +97,80 @@ function sort_(fn, direction) {
   }
 }
 
-export default function query(state) {
-  const ops = state && state.ops || [];
-  const coll = state && state.coll || [];
+// Operations
+
+export function createMapByFn(fn) {
+  return map_(fn);
+}
+
+export function createMapByKeys(keys) {
+  return map_(
+    function(item) { return pick(item, keys) }
+  )
+}
+
+export function createMapByKey(key) {
+  return map_(byKey_(key));
+}
+
+export function createFilterByFn(predicate) {
+  return filter_(predicate);
+}
+
+export function createFiltersByQueryObject(queryObject) {
+  return byObj_(queryObject).map(filter_);
+}
+
+export function createFilterByPair(key, value) {
+  return filter_(byKeyValue_(key, value));
+}
+
+export function createSortByFn(fn, direction) {
+  return sort_(fn, direction);
+}
+
+export function createSortByKey(key, direction) {
+  return sort_(byKey_(key), direction);
+}
+
+export default function query(collection, operations) {
+  const coll = collection || [];
+  const ops = operations || [];
 
   function isKey(value) { return typeof value === 'string' }
   function isEmpty(value) { return typeof value === undefined }
 
   /**
-   * Add one or several operations
-   * @returns New state object
-   * @param {*} operations Array or single value
+   * Build list with operations, by adding one or several operations.
+   * 
+   * @param {Array | Function} operations Type `Array | Function`
+   * @returns Query function for chaining
    */
-  function addOps(operations) {
+  function build(operations) {
     if (isArray(operations)) {
-      return { coll: coll, ops: ops.concat(operations) }
+      return query(coll, ops.concat(operations));
     }
-    return { coll: coll, ops: ops.concat([operations]) };
+    return query(coll, ops.concat([operations]));
   }
   
-  function toArray() {
-    return ops.reduce(
-      function(result, operation) { return operation(result) },   coll.slice()
+  /**
+   * Apply all operations to collection
+   * @param {Array} collection 
+   * @param {Array} operations 
+   */
+  function apply(collection, operations) {
+    return operations.reduce(
+      function(result, operation) { return operation(result) },   collection.slice()
     );
   }
   
   return {
     /**
-     * Apply all operations and return result
-     * @param {*} arg Key, array of keys, function
-     */
-    select: function(arg) {
-      const result = toArray();
-      if (isFunction(arg)) {
-        return result.map(arg);
-      }
-      if (isArray(arg)) return result.map(
-        function(item) { return pick(item, arg) }
-      );
-      if (isKey(arg)) {
-        return result.map(byKey_(arg));
-      };
-      return result;
-    },
-
-    /**
      * Add collection for query
      * @param {Array} collection 
      */
     from: function(collection) {
-      return query({ coll: coll.concat(collection), ops: ops });
+      return query(coll.concat(collection), ops);
     },
 
     /**
@@ -120,40 +180,62 @@ export default function query(state) {
      */
     where: function(arg, value) {
       if (isPlainObject(arg)) {
-        return query(
-          addOps(
-            byObj_(arg).map(
-              function(predicate) { return filter_(predicate) }
-            )
-          )
-        );
+        return build(createFiltersByQueryObject(arg));
       }
       if (isFunction(arg)) {
-        return query(
-          addOps(filter_(arg))
-        );
+        return build(createFilterByFn(arg));
       }
       if (isKey(arg) && !isEmpty(value)) {
-        return query(
-          addOps(filter_(byKeyValue_(arg, value)))
-        );
+        return build(createFilterByPair(arg, value));
       }
-      return query({ coll: coll, ops: ops });
+      return query(coll, ops);
     },
 
     /**
      * Order by
      * @param {*} arg Function, or String as `key`
-     * @param {String} direction String value: `asc | desc`
+     * @param {String} [direction='asc'] String value: `asc | desc`
      */
     orderBy: function(arg, direction) {
-      direction = direction || 'asc';
       if (isFunction(arg)) {
-        return query(addOps(sort_(arg, direction)));
+        return build(createSortByFn(arg, direction))
       }
       if (isKey(arg)) { 
-        return query(addOps(sort_(byKey_(arg), direction)));
+        return build(createSortByKey(arg, direction));
       }
+    },
+
+    /**
+     * Selects values from the collection, after applying clauses `where` and `orderBy`.
+     * Depending on the argument, it returns:
+     * - a list of objects with the entire fields, if it calls without arguments
+     * - a list of objects with selected fields, for argument, that contains list of keys
+     * - a list of values, if argument contains `key`
+     * 
+     * This should be the last operation in the chain.
+     * 
+     * @param {*} [arg] Key, array of keys, function. Optional.
+     * @returns List with query results.
+     */
+    select: function(arg) {
+      if (isFunction(arg)) {
+        return build(createMapByFn(arg)).toArray();
+      }
+      if (isArray(arg)) {
+        return build(createMapByKeys(arg)).toArray();
+      }
+      if (isKey(arg)) {
+        return build(createMapByKey(arg)).toArray();
+      };
+      return apply(coll, ops);
+    },
+
+    /**
+     * Applies all operations and returns results
+     * @returns Array with query result
+     */
+    toArray: function() {
+      return apply(coll, ops);
     }
   };
 }
