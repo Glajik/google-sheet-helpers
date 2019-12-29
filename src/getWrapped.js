@@ -25,7 +25,7 @@ export function updateWith_(keys, values) {
  * 
  * @param {Array} keys Array of keys
  * @param {Range} range Range class of SpreadsheetApp
- * @param {Array} values Array of values
+ * @param {Array} [values] Array of values
  * @returns {Object} Functions get('key'), set('key', value), update({ key: value, ... })
  */
 export function getWrapped(keys, range, values) {
