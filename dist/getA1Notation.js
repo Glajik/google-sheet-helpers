@@ -73,3 +73,4 @@ function getA1Notation(row, col, lastRow, lastCol) {
       break;
   }
 }
+

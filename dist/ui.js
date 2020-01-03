@@ -1,26 +1,16 @@
 /* globals SpreadsheetApp : true */
 
 
-function withSheet_(sheet) {
-  if (isEmpty(sheet)) {
-    return SpreadsheetApp.getActiveSheet();
-  }
-  if (typeof sheet === 'string') {
-    return SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheet);
-  }
-  return sheet;
-}
-
 function uiSwitchTo(sheet, row) {
-  withSheet_(sheet).getRange(row || 1, 1).activate();
+  withSheet(sheet).getRange(row || 1, 1).activate();
 }
 
 function uiSelect(row, sheet) {
-  withSheet_(sheet).getRange(row, 1).setValue(true);
+  withSheet(sheet).getRange(row, 1).setValue(true);
 }
 
 function uiUnselect(row, sheet) {
-  withSheet_(sheet).getRange(row, 1).setValue(false);
+  withSheet(sheet).getRange(row, 1).setValue(false);
 }
 
 function uiSelectMany(rowList, sheet) {
@@ -30,7 +20,7 @@ function uiSelectMany(rowList, sheet) {
 
 function uiRemoveSelected(sheet) {
   function unselect(range) { range.setValue(false); }
-  const sheet_ = withSheet_(sheet);
+  const sheet_ = withSheet(sheet);
   const last = sheet_.getLastRow();
   const a1Notation = 'A1:A'.concat(last);
   sheet_.getRange(a1Notation)

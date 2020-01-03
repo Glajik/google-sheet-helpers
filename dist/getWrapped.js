@@ -1,15 +1,4 @@
 
-function updateWith_(keys, values) {
-  return function(data) {
-    function fn(value, index) {
-      const key = keys[index];
-      if (!data[key]) return value;
-      return data[key];
-    }
-    return values.map(fn);
-  };
-}
-
 /**
  * Usage:
  * ```
@@ -24,7 +13,7 @@ function updateWith_(keys, values) {
  * 
  * @param {Array} keys Array of keys
  * @param {Range} range Range class of SpreadsheetApp
- * @param {Array} values Array of values
+ * @param {Array} [values] Array of values
  * @returns {Object} Functions get('key'), set('key', value), update({ key: value, ... })
  */
 function getWrapped(keys, range, values) {
@@ -69,11 +58,12 @@ function getWrapped(keys, range, values) {
      * @param {*} data Key-value map
      */
     update: function(data) {
-      const update = updateWith_(keys, values);
+      const update = updateWith(keys, values);
       const newValues = update(data);
       range.setValues([newValues]);
       values = newValues;
       return getWrapped(keys, range, newValues);
-    },
+    }
   };
 }
+

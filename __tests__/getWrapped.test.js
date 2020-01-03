@@ -1,13 +1,6 @@
 // import sinon from 'sinon';
 
-import { updateWith_, getWrapped } from '../src/getWrapped';
-
-it('updateWith_ - should work', () => {
-  const keys = ['first', 'second'];
-  const values = ['a', 'b'];
-  const update = updateWith_(keys, values);
-  expect(update({ second: 'abc' })).toEqual(['a', 'abc']);
-});
+import getWrapped from '../src/getWrapped';
 
 it('getWrapped - should work', () => {
   const keys = ['first', 'second', 'third'];

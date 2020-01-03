@@ -47,7 +47,7 @@ export function toLetters_(num) {
  * @param {Integer} lastCol Last column number
  * @returns {String} Coordinates of the range in a1Notation
  */
-export function getA1Notation(row, col, lastRow, lastCol) {
+function getA1Notation(row, col, lastRow, lastCol) {
   function join(a, b) {
     return [a, b].join(':')
   }
@@ -73,3 +73,5 @@ export function getA1Notation(row, col, lastRow, lastCol) {
       break;
   }
 }
+
+export default getA1Notation;

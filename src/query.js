@@ -1,4 +1,7 @@
-import { isPlainObject, isFunction, pick, isArray } from './lodash';
+import isPlainObject from 'lodash/isPlainObject';
+import isFunction from 'lodash/isFunction';
+import isArray from 'lodash/isArray'
+import pick from 'lodash/pick';
 
 /**
  * Takes `key` and returns function, that expect plain object,
@@ -133,7 +136,7 @@ export function createSortByKey(key, direction) {
   return sort_(byKey_(key), direction);
 }
 
-export default function query(collection, operations) {
+function query(collection, operations) {
   const coll = collection || [];
   const ops = operations || [];
 
@@ -239,3 +242,5 @@ export default function query(collection, operations) {
     }
   };
 }
+
+export default query;
