@@ -39,3 +39,6 @@ export const combineReducers = (reducers) => {
     );
   };
 };
+
+export default { createStore, combineReducers };
+

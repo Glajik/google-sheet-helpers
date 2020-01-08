@@ -140,6 +140,10 @@ var combineReducers = function combineReducers(reducers) {
     }, {});
   };
 };
+/* harmony default export */ __webpack_exports__["default"] = ({
+  createStore: createStore,
+  combineReducers: combineReducers
+});
 
 /***/ })
 
