@@ -44,7 +44,7 @@ function getWrapped(keys, range, values) {
       const index = keys.indexOf(key);
       const col = index + 1;
       if (!col) {
-        throw new Error('Can\'t set - no key "%s" in keys: %s', key, keys);
+        throw new Error(['Can\'t set - no key "', key,'" in keys: ', keys].join(''));
       }
       range.getCell(1, col).setValue(value);
       const newValues = [].concat(values);
