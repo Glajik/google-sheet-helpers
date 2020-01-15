@@ -1,4 +1,4 @@
-# google-sheet-helpers
+# gs-helpers
 My lib with simple functions that I use in my own work with Google Apps Scripts
 
 ## Usage
@@ -6,8 +6,8 @@ My lib with simple functions that I use in my own work with Google Apps Scripts
 ### 1. Add to your project `src` folder as Git submodule
 
 ```BASH
-cd src
-git submodule add https://github.com/Glajik/google-sheet-helpers.git
+cd dist
+git submodule add https://github.com/Glajik/gs-helpers.git
 ```
 
 ### 2. Setup your .claspignore file
