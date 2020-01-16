@@ -21,7 +21,7 @@ it('getWrapped - should work', () => {
   };
 
   const range = rangeClass([values]);
-  const wrapped = getWrapped(keys, range);
+  const wrapped = getWrapped(keys)(range);
 
   // Calling get() without parameters return data object
   expect(wrapped.get()).toEqual({ first: 'a', second: 'b', third: 'c' });
