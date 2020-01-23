@@ -7,7 +7,7 @@
  * @param {Number} num Column number
  * @returns {String} Letter from 'A' to 'Z'
  */
-function getLetter_(num) {
+export function getLetter_(num) {
   // Согласно таблице ASCII - код 65 = A
   const offset = 65;
   const remainder = num % 26;
@@ -26,7 +26,7 @@ function getLetter_(num) {
  * @param {Integer} num Column number
  * @returns {String} Letters 'A-Z', for num < 27 and 'AA-ZZZ', if more
  */
-function toLetters_(num) {
+export function toLetters_(num) {
   if (num < 27) {
     return getLetter_(num);
   }
@@ -49,12 +49,10 @@ function toLetters_(num) {
  */
 function getA1Notation(row, col, lastRow, lastCol) {
   function join(a, b) {
-    return [a, b].join(':')
+    return [a, b].join(':');
   }
   const A1 = col && row && toLetters_(col).concat(row);
   switch (arguments.length) {
-    case 0:
-      throw new Error('Function expects at least one argument');
     case 1:
       return join(row, row);
     case 2:
@@ -70,7 +68,8 @@ function getA1Notation(row, col, lastRow, lastCol) {
       const Z5 = toLetters_(lastCol).concat(lastRow);
       return join(A1, Z5);
     default:
-      break;
+      throw new Error('Function expects at least one argument');
   }
 }
 
+export default getA1Notation;

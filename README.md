@@ -19,7 +19,7 @@ Example of `.claspignore` file
 ```TEXT
 # Ignore all submodule's folders, except 'dist'
 gs-helpers/**
-!**/dist/**
+!**/*.js
 ```
 
 ### Update dependency

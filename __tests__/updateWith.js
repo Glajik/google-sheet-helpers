@@ -1,4 +1,4 @@
-import updateWith from '../src/updateWith';
+import updateWith from '../updateWith';
 
 it('updateWith_ - should work', () => {
   const keys = ['first', 'second'];

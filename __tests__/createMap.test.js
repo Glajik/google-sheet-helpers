@@ -1,4 +1,4 @@
-import createMap from '../src/createMap';
+import createMap from '../createMap';
 
 it('createMap - should work', () => {
   const keys = ['first', 'second'];

@@ -12,13 +12,13 @@ import updateWith from './updateWith';
  * wrapped.set('name', 'Rob').set('age', 24);
  * wrapped.update({ name: 'Rick', age: 47 });
  * ```
- * 
+ *
  * @param {Array} keys Array of keys
  * @param {Range} range Range class of SpreadsheetApp
  * @param {Array} [values] Array of values
  * @returns {Object} Functions get('key'), set('key', value), update({ key: value, ... })
  */
-function getWrapped(keys) {  
+function getWrapped(keys) {
   return function withRange(range, values) {
     values = values || range.getValues()[0];
 
