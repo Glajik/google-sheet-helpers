@@ -1,6 +1,6 @@
 // import sinon from 'sinon';
 
-import getWrapped from '../getWrapped';
+import getWrapped from '../src/getWrapped';
 
 it('getWrapped - should work', () => {
   const keys = ['first', 'second', 'third'];

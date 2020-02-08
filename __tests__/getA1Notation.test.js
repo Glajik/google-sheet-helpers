@@ -1,34 +1,34 @@
-import getA1Notation, { getLetter_, toLetters_ } from '../getA1Notation';
+import getA1Notation, { getOneLetter, getLetters } from '../src/getA1Notation';
 
-it('getLetter_ - should work', () => {
-  expect(getLetter_(1)).toBe('A');
-  expect(getLetter_(2)).toBe('B');
-  expect(getLetter_(25)).toBe('Y');
-  expect(getLetter_(26)).toBe('Z');
-  expect(getLetter_(27)).toBe('A');
-  expect(getLetter_(28)).toBe('B');
-  expect(getLetter_(52)).toBe('Z');
-  expect(getLetter_(53)).toBe('A');
+it('getOneLetter - should work', () => {
+  expect(getOneLetter(1)).toBe('A');
+  expect(getOneLetter(2)).toBe('B');
+  expect(getOneLetter(25)).toBe('Y');
+  expect(getOneLetter(26)).toBe('Z');
+  expect(getOneLetter(27)).toBe('A');
+  expect(getOneLetter(28)).toBe('B');
+  expect(getOneLetter(52)).toBe('Z');
+  expect(getOneLetter(53)).toBe('A');
 });
 
-it('toLetters_ - should work', () => {
-  expect(toLetters_(1)).toBe('A');
-  expect(toLetters_(2)).toBe('B');
-  expect(toLetters_(26)).toBe('Z');
-  expect(toLetters_(27)).toBe('AA');
-  expect(toLetters_(28)).toBe('AB');
-  expect(toLetters_(29)).toBe('AC');
-  expect(toLetters_(30)).toBe('AD');
-  expect(toLetters_(52)).toBe('AZ');
-  expect(toLetters_(53)).toBe('BA');
-  expect(toLetters_(676)).toBe('YZ');
-  expect(toLetters_(677)).toBe('ZA');
-  expect(toLetters_(703)).toBe('AAA');
-  expect(toLetters_(717)).toBe('AAO');
-  expect(toLetters_(728)).toBe('AAZ');
-  expect(toLetters_(729)).toBe('ABA');
-  expect(toLetters_(730)).toBe('ABB');
-  expect(toLetters_(18278)).toBe('ZZZ');
+it('getLetters - should work', () => {
+  expect(getLetters(1)).toBe('A');
+  expect(getLetters(2)).toBe('B');
+  expect(getLetters(26)).toBe('Z');
+  expect(getLetters(27)).toBe('AA');
+  expect(getLetters(28)).toBe('AB');
+  expect(getLetters(29)).toBe('AC');
+  expect(getLetters(30)).toBe('AD');
+  expect(getLetters(52)).toBe('AZ');
+  expect(getLetters(53)).toBe('BA');
+  expect(getLetters(676)).toBe('YZ');
+  expect(getLetters(677)).toBe('ZA');
+  expect(getLetters(703)).toBe('AAA');
+  expect(getLetters(717)).toBe('AAO');
+  expect(getLetters(728)).toBe('AAZ');
+  expect(getLetters(729)).toBe('ABA');
+  expect(getLetters(730)).toBe('ABB');
+  expect(getLetters(18278)).toBe('ZZZ');
 });
 
 it('getA1Notation - should work', () => {

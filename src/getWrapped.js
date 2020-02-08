@@ -1,5 +1,4 @@
-import createMap from './createMap';
-import updateWith from './updateWith';
+import R from 'ramda';
 
 /**
  * Usage:
@@ -20,7 +19,7 @@ import updateWith from './updateWith';
  */
 function getWrapped(keys) {
   return function withRange(range, values) {
-    values = values || range.getValues()[0];
+    var state = values || R.head(range.getValues());
 
     return {
       /**
@@ -30,7 +29,7 @@ function getWrapped(keys) {
        * @param {String} key
        */
       get: function(key) {
-        const data = createMap(keys, values);
+        const data = R.zipObj(keys, state);
         if (key) return data[key];
         return data;
       },
@@ -48,24 +47,23 @@ function getWrapped(keys) {
           throw new Error(['Can\'t set - no key "', key,'" in keys: ', keys].join(''));
         }
         range.getCell(1, col).setValue(value);
-        const newValues = [].concat(values);
-        newValues[index] = value;
-        values = newValues;
-        return withRange(range, newValues);
+        state = [].concat(values);
+        state[index] = value;
+        return withRange(range, state);
       },
 
       /**
        * Use it to update some or all values in row range
        * Usage: update({ 'a': 1, 'text': 'hello' })
        * @returns getWrapped for chaining
-       * @param {*} data Key-value map
+       * @param {Object} item object
        */
-      update: function(data) {
-        const update = updateWith(keys, values);
-        const newValues = update(data);
-        range.setValues([newValues]);
-        values = newValues;
-        return withRange(range, newValues);
+      update: function(item) {
+        const data = R.zipObj(keys, state);
+        const updated = R.merge(data, item);
+        state = R.values(updated);
+        range.setValues([state]);
+        return withRange(range, state);
       }
     };
   };

@@ -1,4 +1,4 @@
-function extract(str, regex) {
+function byRegex(regex, str) {
   const result = regex.exec(str);
   if (result && result.length > 1) {
     return result[1];
@@ -6,4 +6,4 @@ function extract(str, regex) {
   return str;
 }
 
-export default extract;
+export default byRegex;
