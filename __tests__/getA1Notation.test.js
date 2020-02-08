@@ -1,4 +1,4 @@
-import getA1Notation, { getOneLetter, getLetters } from '../src/getA1Notation';
+import getA1Notation, { getOneLetter, getLetters } from '../getA1Notation';
 
 it('getOneLetter - should work', () => {
   expect(getOneLetter(1)).toBe('A');
